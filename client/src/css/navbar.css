@@ -1,0 +1,6 @@
+a.navbar-brand:hover,a.nav-link:hover{
+    background-color: #aaa;
+    color:black;
+    border-radius: 3px;
+    padding: 5px;
+}
