@@ -57,4 +57,42 @@ app.get('/getUser',(req,res)=>{
 
 const port = 5000;
 
+app.post('/addTodo',(req,res)=>{
+  console.log(req.body.todo);
+  let todoObj = new models.Todo({
+    todo:req.body.todo
+  });
+  todoObj.save().then(data=>{
+    res.json({data:data});
+  });
+});
+
+
+app.get('/getTodos',(req,res)=>{
+  models.Todo.find({}).then(todos=>{
+    // todos.filter(todo=>{
+    //   let pres = new Date()/1000;
+    //   let prev = new Date(todo.time)/1000;
+    //   let val = Math.floor(pres - prev);
+    //   return val<86400;
+    // });
+    res.json({todos});
+  });
+});
+
+
+app.get('/getDeadTodos',(req,res)=>{
+  models.DeadTodo.find({}).then(deadtodos=>{
+    if(deadtodos.length>0){
+      res.json({deadtodos})
+    }
+    else{
+      res.json({deadtodos:null})
+    }
+    
+  });
+
+  // res.json({message:'dead message form server'});
+});
+
 app.listen(port, () => `Server running on port ${port}`);
