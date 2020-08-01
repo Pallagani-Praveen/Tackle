@@ -1,0 +1,17 @@
+[33m019fff0[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge branch 'master' of https://github.com/Pallagani-Praveen/Tackle
+[33m764bafd[m Initial commit
+[33m796d2ed[m basic setup finished for todos and deadtodos
+[33mc7e41cf[m left with some errors in auth
+[33mc6e471a[m edited docs
+[33mdd33146[m Merge pull request #2 from bradtraversy/revert-1-master
+[33m3a984bf[m[33m ([m[1;31morigin/revert-1-master[m[33m)[m Revert "redux integration"
+[33m22c8679[m Merge pull request #1 from Gregjarvez/master
+[33m8105640[m removed .idea
+[33m2925e0a[m added proptypes
+[33m1b1d529[m setup customers to use redux
+[33mfdaffa7[m set up provider
+[33m97bf8ed[m created store and initialize redux devtools
+[33mbb159c2[m added reducers
+[33m0ce55eb[m Added action for customers
+[33mcedfd8f[m Fixed client-install script
+[33m3a14e26[m version 1.0.0

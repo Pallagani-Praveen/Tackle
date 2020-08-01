@@ -1,22 +1,31 @@
 import React,{Component} from 'react';
 import '../css/list.css';
-import '../css/loader.css';
 import Font from '../HOC/Font';
 import {Helmet} from 'react-helmet';
 
 
 class List extends Component{
     state = {
-        todos:''
+        todos:'',
+        info_msg:'Todos Loading Please Wait For Moment....'
     }
 
     componentDidMount(){
         fetch('/getTodos').then(res=>{
             res.json().then(data=>{
-            
-                this.setState({
-                    todos:Array.from(data.todos)
-                })
+                if(data.todos){
+                    this.setState({
+                        ...this.state,
+                        todos:Array.from(data.todos)
+                    })
+                }
+                else{
+                    this.setState({
+                        ...this.state,
+                        info_msg:'You Have No Todos Left....., YAY!!!!'
+                    })
+                }
+                
             });
         });
 
@@ -58,9 +67,15 @@ class List extends Component{
         let list = this.state.todos.length>0?(
             this.state.todos.map((todo,index)=>{
                 let {val,color} = this.timer(todo.time);
+                
                 let stamp = <i className="fa fa-circle text-success mr-2" aria-hidden="true"></i>;
                 if(color==='danger'){
                     stamp = <i className="fa fa-circle text-danger mr-2" aria-hidden="true"></i>
+                }
+
+                let arrow = <i className="fa fa-arrow-right mr-2 text-primary" aria-hidden="true"></i>;
+                if(color==='danger'){
+                    arrow = <i className="fa fa-arrow-right mr-2 text-danger" aria-hidden="true"></i>;
                 }
                 
                 return (
@@ -70,27 +85,24 @@ class List extends Component{
                                 Todo List
                             </title>
                         </Helmet>
-                        <div className="alert alert-dark d-flex flex-wrap  justify-content-between  m-1" role="alert">
+                        <div className="alert alert-dark d-flex flex-wrap  justify-content-between  m-1 border border-primary" role="alert">
                             <div className="text ">
-                                <i className="fa fa-arrow-right mr-2" aria-hidden="true"></i>
+                                {arrow}
                                 {this.truncatechars(todo.todo)}
                             </div>
 
-                            <div id={index} className="border border-dark text-dark px-2 rounded">
+                            <div id={index} className="border border-primary text-dark px-2 rounded">
                                 Time Remaining : {stamp}{val}
                             </div>
                         </div>
                     </li>
                 )
             })
-            ):(<div className="outer-loader">
-                <div className="loader"></div>
-            </div>
-            );
+        ):(<div className="text-center">{this.state.info_msg}</div>);
 
         return(
             <div className="list container mt-3 ">
-                <h4 className="text-center">List of Todo's</h4>
+                <h4 className="text-center text-primary">List of Todo's</h4>
                 <ul>
                     {list}
                 </ul>

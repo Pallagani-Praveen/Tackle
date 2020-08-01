@@ -70,13 +70,13 @@ app.post('/addTodo',(req,res)=>{
 
 app.get('/getTodos',(req,res)=>{
   models.Todo.find({}).then(todos=>{
-    // todos.filter(todo=>{
-    //   let pres = new Date()/1000;
-    //   let prev = new Date(todo.time)/1000;
-    //   let val = Math.floor(pres - prev);
-    //   return val<86400;
-    // });
-    res.json({todos});
+    if(todos.length!=0){
+      res.json({todos});
+    }
+    else{
+      res.json({todos:null});
+    }
+    
   });
 });
 
@@ -91,8 +91,6 @@ app.get('/getDeadTodos',(req,res)=>{
     }
     
   });
-
-  // res.json({message:'dead message form server'});
 });
 
 app.listen(port, () => `Server running on port ${port}`);

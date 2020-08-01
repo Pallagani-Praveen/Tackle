@@ -28,7 +28,7 @@ class Form extends Component{
 
         fetch('/addTodo',options).then(res=>{
             res.json().then(data=>{
-                console.log(data.data);
+                
                 this.setState({
                     todo:''
                 },()=>{
